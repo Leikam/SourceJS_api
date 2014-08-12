@@ -1,0 +1,66 @@
+<html>
+<head></head>
+<body>
+
+<script src="data/pages_tree.js"></script>
+<script>
+
+var
+    path = [],
+    pathArr = [],
+    recurLvl = -1
+    ;
+
+/**
+ *
+ * @param {json} obj            pages_tree.json
+ * @param {string} lookup       filter
+ * @param {string} root         stop-argument: filter doesnt goes deeper
+ */
+function getSpecs(obj, lookup, stopFlag) {
+    recurLvl++;
+    for (k in obj) {
+        if (recurLvl < 1 && lookup && lookup.indexOf(k) === -1) continue;
+
+//console.log('-- recurLvl: ', recurLvl);
+//console.log(k, path);
+
+        if (k === stopFlag) {
+//            path.pop();
+//console.log('-> TRUE!', recurLvl, k, path);
+            pathArr.push( path.join('/') );
+//            back = recurLvl;
+
+            if (recurLvl > 1) {
+//console.log('-> Returned.');
+                recurLvl--;
+//                path.pop();
+                return;
+            }
+        }
+
+        path.push(k);
+
+        if (getType(obj[k]) == 'Object') {
+//console.log('GO INTO!');
+            getSpecs(obj[k], null, stopFlag);
+
+        }
+
+        path.pop();
+    }
+
+    recurLvl--;
+//console.log('GO OUT!', recurLvl);
+}
+
+function getType(obj) { return {}.toString.call(obj).slice(8,-1) }
+
+
+
+// TODO: check list below
+// [*] make arguments looks like ['mob/base']
+// [*] ...
+</script>
+</body>
+</html>

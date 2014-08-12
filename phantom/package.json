@@ -1,0 +1,16 @@
+{
+  "name": "phantom",
+  "version": "0.0.0",
+  "description": "Parsing engine for Sourcejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "test-ph"
+  },
+  "keywords": [
+    "phantomjs",
+    "sourcejs",
+    "nodejs"
+  ],
+  "author": "Dmitry Lapynov",
+  "license": "ISC"
+}
